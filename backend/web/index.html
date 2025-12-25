@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard IoT Gudang</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2>IoT Gudang</h2>
+    <ul>
+      <li onclick="showPage('dashboard')">📊 Dashboard</li>
+      <li onclick="showPage('grafik')">📈 Grafik</li>
+      <li onclick="showPage('kontrol')">🎛 Kontrol</li>
+      <li onclick="showPage('log')">📜 Log</li>
+    </ul>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="page active">
+      <h1>Dashboard Monitoring</h1>
+
+      <div class="card-container">
+        <div class="card">
+          <h3>Suhu</h3>
+          <p id="temp">-- °C</p>
+        </div>
+
+        <div class="card">
+          <h3>Status Hama</h3>
+          <p id="hama" class="normal">NORMAL</p>
+        </div>
+
+        <div class="card">
+          <h3>Kipas</h3>
+          <p id="fan">OFF</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRAFIK -->
+    <section id="grafik" class="page">
+      <h1>Visualisasi Data</h1>
+
+      <div class="chart-box">
+        <h3>Grafik Suhu</h3>
+        <canvas id="tempChart"></canvas>
+      </div>
+
+      <div class="chart-box">
+        <h3>Grafik Jarak Ultrasonic</h3>
+        <canvas id="distChart"></canvas>
+      </div>
+
+      <div class="chart-box">
+        <h3>Grafik Deteksi Suara</h3>
+        <canvas id="soundChart"></canvas>
+      </div>
+    </section>
+
+    <!-- KONTROL -->
+    <section id="kontrol" class="page">
+      <h1>Kontrol Perangkat</h1>
+
+      <div class="control-box">
+        <button onclick="setFan(1)">Kipas ON</button>
+        <button onclick="setFan(0)">Kipas OFF</button>
+
+        <button onclick="setBuzzer(1)">Alarm ON</button>
+        <button onclick="setBuzzer(0)">Alarm OFF</button>
+
+        <label>Servo</label><br>
+        <input type="range" min="0" max="180" value="90" oninput="setServo(this.value)">
+      </div>
+    </section>
+
+    <!-- LOG -->
+    <section id="log" class="page">
+      <h1>Log Aktivitas</h1>
+
+      <div class="log-box">
+        <table>
+          <thead>
+            <tr>
+              <th>Waktu</th>
+              <th>Suhu</th>
+              <th>Jarak</th>
+              <th>Suara</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="logTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
